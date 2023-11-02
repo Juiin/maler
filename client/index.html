@@ -1,0 +1,163 @@
+﻿<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet"  href="/client/style.css" >
+        <title>Maler</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+        <link rel="icon" href="client/img/juin.ico">
+        <!--<script src="http://cdn.socket.io/socket.io-1.4.5.js"></script>-->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.js"></script>
+        <!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script> -->
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+        <!--<script src="//cdn.techpines.io/jquery.event.drag-2.0.js"></script>-->
+        <script src="/client/lib/sorttable.js"></script>
+        <script src="/client/lib/jquery.event.drag-2.2.js"></script>
+        <script src="/client/lib/jquery.event.drag.live-2.2.js"></script>
+        <script src="/client/lib/gretro.js"></script>
+        <script src="/client/lib/gretro-paint.js"></script>
+    </head>
+    
+    <body>
+        <div id="content">
+            <div id="signIn">
+                <h1 style="text-align: center; font-family: Courier New; color: white; text-shadow: -1px -1px 0px rgb(0, 0, 0), 1px -1px 0px rgb(0, 0, 0), -1px 1px 0px rgb(0, 0, 0), 1px 1px 0px rgb(0, 0, 0);">Login</h1>
+                <div id="login" style="color: white; text-shadow: -1px -1px 0px rgb(0, 0, 0), 1px -1px 0px rgb(0, 0, 0), -1px 1px 0px rgb(0, 0, 0), 1px 1px 0px rgb(0, 0, 0);">
+                    Username: <input id="username" type="text">
+                    <button id="signInButton">Login</button> 
+                </div>
+                <hr>
+                <div id="leaderboards">
+                <!--<h1 style="text-align: center; font-family: Courier New; color: white; text-shadow: -1px -1px 0px rgb(0, 0, 0), 1px -1px 0px rgb(0, 0, 0), -1px 1px 0px rgb(0, 0, 0), 1px 1px 0px rgb(0, 0, 0);">Leaderboards</h1>
+                    <table id="lbTable">
+                      <tr>
+                        <th class="sorttable_nosort">Name</th>
+                        <th>Win</th>
+                        <th>Loss</th>
+                        <th>Ratio</th>
+                        <th>Liberal Ratio</th>
+                        <th>Fascist Ratio</th>
+                      </tr>
+                    </table>
+                -->
+                </div>
+            </div>
+
+            <div id="lobby" style="display: none;">
+                <div id="roomList">
+                    
+                </div>
+                <div id="currentRoom" style="font-family: Courier New; color: white; text-shadow: -1px -1px 0px rgb(0, 0, 0), 1px -1px 0px rgb(0, 0, 0), -1px 1px 0px rgb(0, 0, 0), 1px 1px 0px rgb(0, 0, 0);">
+                    
+                </div>
+                <div id="chatDiv">
+                    <div id="chatText"></div>
+                    <div id="chatUser"></div>
+                    <form id="chatForm" >
+			<input id="chatInput" type="text" style="width:470px;float:left;">
+                    </form>
+                    <button id="createRoomButton" onclick="openNav()">Create Room!</button>
+                    <button id="startGameButton">Start Game!</button>
+                    <button id="leaveRoomButton">Leave Room</button>
+                </div>
+                
+            </div>
+
+            <div id="gameDiv" style="display: none;">
+                <div id="info"></div>
+                <div>
+                    <canvas id="myCanvas" width="833" height="400"></canvas>
+                    <!--<button id="readyScreen">Click to Start Drawing!</button>-->
+					<button id="wordOptionOne" class="wordOption">Word onerror</button>
+					<button id="wordOptionTwo" class="wordOption">Word two</button>
+					<button id="wordOptionThree" class="wordOption">Word Three asdjpopasd</button>
+                </div>
+                
+                <div id="drawSettings">
+                    <button id="clearCanvas" onclick="clearCanvasServ()">Clear</button>
+                    <button id="blackColor" class="colorSelect colorSelectSelected" onclick="selectColor('black', this)"></button>
+                    <button id="greyColor" class="colorSelect" onclick="selectColor('grey', this)"></button>
+                    <button id="blueColor" class="colorSelect" onclick="selectColor('blue', this)"></button>
+                    <button id="lightblueColor" class="colorSelect" onclick="selectColor('lightblue', this)"></button>
+                    <button id="redColor" class="colorSelect" onclick="selectColor('red', this)"></button>
+                    <button id="yellowColor" class="colorSelect" onclick="selectColor('yellow', this)"></button>
+                    <button id="greenColor" class="colorSelect" onclick="selectColor('green', this)"></button>
+                    <button id="brownColor" class="colorSelect" onclick="selectColor('brown', this)"></button>
+                    <button id="purpleColor" class="colorSelect" onclick="selectColor('purple', this)"></button>
+                    <button id="orangeColor" class="colorSelect" onclick="selectColor('orange', this)"></button>
+                    <select id="drawWidthSelect">
+                        <option value="1">1px</option>
+                        <option value="3" selected="selected">3px</option>
+                        <option value="5">5px</option>
+                        <option value="7">7px</option> 
+                        <option value="10">10px</option>
+                        <option value="15">15px</option>
+                    </select>
+                    <select id="toolSelect">
+                        <option value="brush">Brush</option>
+                        <option value="eraser">Eraser</option>
+                    </select>
+                    
+                </div>
+                
+                
+                <div id="chatUserIngameBlue"></div>
+                <div id="chat" style="display:inline-block">
+                    <div id="chatTextIngame"></div>
+                    
+                    <form id="chatFormIngame" >
+			<input id="chatInputIngame" type="text" style="width:470px;float:left;">
+                    </form>
+                </div>
+                <div id="chatUserIngameRed"></div>
+                <button id="newGameButton" style="display: none" onclick="newGameOnClick()">New Game!</button>
+                <div class="overlayy">
+                    <a id="leaveGameButton" href="javascript:void(0)" class="closebtn">&times;</a>
+                </div>
+                
+            </div>
+            
+            <!-- Create Room Overlay -->
+            <div id="myNav" class="overlay">
+                <!-- Button to close the overlay navigation -->
+                <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+
+                <!-- Overlay content -->
+                <div class="overlay-content">
+                    Room Name: <input id="roomNameInput" type="text"> <br>
+                    Room Password(optional): <input id="roomPasswordInput" type="text"> <br>
+                    GameMode:
+                    <select id="gameModeSelect">
+                        <option value="ffa">Free for all</option>
+                        <option value="teams">Teams</option>
+                        <option value="freestyle">Freestyle</option>
+                    </select> <br>
+                    Time to Draw:
+                    <select id="timeToDrawSelect">
+                        <option value="30">30 seconds</option>
+                        <option value="60">60 seconds</option>
+                        <option value="80" selected="selected">80 seconds</option>
+                        <option value="100">100 seconds</option>
+                        <option value="120">120 seconds</option>
+                        <option value="180">180 seconds</option>
+                        <option value="9999">9999 seconds</option>
+                    </select><br>
+					Word List:
+					<select id="wordListSelect">
+						<option value="Default">Default</option>
+						<option value="Path of Exile">Path of Exile</option>
+					</select><br>
+					<input type="checkbox" id="customWordList" name="customWordList">
+					<label for="customWordList"> Use a Custom Word List</label><br>
+					<textarea rows="4" cols="50" placeholder="Type your custom words here seperated by a comma(At least 4 Words, game will use selected word list if entered one is invalid)" id="customWordListString" style="display: none"></textarea><br>
+                    <button id="createRoomFinal" onclick="createRoom()"> Create Room! </button>
+                </div>
+            </div>
+        </div>
+        <script src="/client/client.js"></script>
+        <script src="/client/gameClient.js"></script>
+    </body>
+    
+</html>
+
+
