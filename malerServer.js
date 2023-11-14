@@ -96,7 +96,7 @@ io.sockets.on('connection', function(socket){
                        word = word.toLowerCase();
                        word = word.charAt(0).toUpperCase() + word.slice(1);
                        for(var i in socket.room.playerList){
-                            socket.room.playerList[i].emit("addToChat","Point for " + socket.username + ". " + word + " was correct.");
+                            socket.room.playerList[i].emit("addToChat","Point for <b>" + socket.username + ". " + word + " </b>was correct.");
 							socket.room.playerList[i].emit("wordCorrectSound");
                        }
                        playerObj.score += socket.room.timeRemaining;
@@ -262,8 +262,9 @@ var refreshUserChatIngame = function(room){
                 team = "black";
             }
             if(name === room.currentDrawer){
-				name += " (Drawing)";
+				name = "<b>" + name + " ✏️</b>";
 			}
+			
             if(playerObj !== null){
                 room.playerList[i].emit("addToUserChatIngame",name,team,playerObj.score);
             }else{

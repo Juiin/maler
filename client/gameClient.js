@@ -165,6 +165,9 @@ var selectColor = function(color, selectedColorElement){
 	document.getElementById("brownColor").classList.remove("colorSelectSelected");
 	document.getElementById("purpleColor").classList.remove("colorSelectSelected");
 	document.getElementById("orangeColor").classList.remove("colorSelectSelected");
+	document.getElementById("pinkColor").classList.remove("colorSelectSelected");
+	document.getElementById("saddleBrownColor").classList.remove("colorSelectSelected");
+	document.getElementById("chartreuseColor").classList.remove("colorSelectSelected");
 	
 	selectedColorElement.classList.add("colorSelectSelected");
 };

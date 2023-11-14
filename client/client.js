@@ -101,13 +101,13 @@ socket.on("addToUserChat",function(data){
 
 socket.on("addToUserChatIngame",function(data,team,playerScore){
     if(team === "red"){
-        chatUserIngameRed.innerHTML += "<div >" + data + "</div>";
+        chatUserIngameRed.innerHTML += "<div style='color:white'>" + data + "</div>";
     }else if(team === "blue"){
         
         if(playerScore > 0){
-            chatUserIngameBlue.innerHTML += "<div >" + data + " " + playerScore + "</div>";
+            chatUserIngameBlue.innerHTML += "<div style='color:white'>" + data + " " + playerScore + "</div>";
         }else{
-            chatUserIngameBlue.innerHTML += "<div >" + data + "</div>";
+            chatUserIngameBlue.innerHTML += "<div style='color:white'>" + data + "</div>";
         }
     }else{
         chatUserIngameBlue.innerHTML += "<div style='color:yellow' >" + data + "</div>";
